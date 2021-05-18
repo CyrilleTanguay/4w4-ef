@@ -1463,6 +1463,7 @@ La barre du millieu
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  line-height: 1.5px;
 }
 
 .galerie .flip-card {
@@ -1503,6 +1504,7 @@ La barre du millieu
   background-color: #2980b9;
   color: white;
   transform: rotateY(180deg);
+  line-height: 1.5em;
 }
 
 /* local page
@@ -1572,5 +1574,33 @@ La barre du millieu
 --------------------------------------------- */
 #secondary {
   padding-left: 8%;
+}
+
+.ctrl-session {
+  display: flex;
+  justify-content: center;
+  width: 100vw;
+}
+
+.session {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.sessions {
+  border-color: black;
+  border-style: groove;
+}
+
+.option {
+  background-color: red;
+  border-color: red;
+  border-style: groove;
+}
+
+@media screen and (max-width: 400px) {
+  .session {
+    grid-template-columns: 1fr;
+  }
 }
 /*# sourceMappingURL=style.css.map */

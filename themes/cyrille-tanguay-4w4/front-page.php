@@ -24,42 +24,39 @@ get_header();
 				?>
 			</header><!-- .page-header -->
 			<section class="cours">
+				<section class="partSessions">
 			<?php
 			/* Start the Loop */
             $precedent = "XXXXXX";
-			$chaine_bouton_radio = '';
 			//global $tProprieté;
 			while ( have_posts() ) :
 				the_post();
                 convertirTableau($tPropriété);
 				//print_r($tPropriété);
-				if ($tPropriété['typeCours'] != $precedent): 
+				if ($tPropriété['typeSession'] != $precedent): 
 					if ("XXXXXX" != $precedent)	: ?>
 						</section>
-						<?php if (in_array($precedent, ['Web', 'Jeu', 'Spécifique'])) : ?>
-							<section class="ctrl-carrousel">
-								<?php echo $chaine_bouton_radio;
-								$chaine_bouton_radio = '';
-								 ?>		
+						<?php if (in_array($precedent, ['1','2','3','4','5','6'])) : ?>
+							<section class="ctrl-session">
+
 							</section>
 						<?php endif; ?>
 					<?php endif; ?>	
-					<h2><?php echo $tPropriété['typeCours'] ?></h2>
-					<section <?php echo class_composant($tPropriété['typeCours']) ?>>
+					<section <?php echo class_composant($tPropriété['typeSession']) ?>>
+					<h2><?php echo $tPropriété['typeSession'] ?></h2>
+
 				<?php endif ?>	
 
-				<?php if (in_array($tPropriété['typeCours'], ['Web', 'Jeu', 'Spécifique']) ) : 
-						get_template_part( 'template-parts/content', 'cours-carrousel' ); 
-						$chaine_bouton_radio .= '<input class="rad-carrousel"  type="radio" name="rad-'.$tPropriété['typeCours'].'">';
-						elseif ($tPropriété['typeCours'] == 'Projets'):
-							get_template_part( 'template-parts/content', 'galerie' ); 
-						else :		
-						get_template_part( 'template-parts/content', 'cours-article' ); 
+
+				<?php if (in_array($tPropriété['typeSession'], ['1','2','3','4','5','6']) ) : 
+						get_template_part( 'template-parts/content', 'session' ); 				
+
 				endif;	
-				$precedent = $tPropriété['typeCours'];
-			endwhile;?>
+				$precedent = $tPropriété['typeSession'];
+						endwhile;?>
 			</section> <!-- fin section cours -->
 		<?php endif; ?>
+		</section>
 		<section class="admin-rapide">
 			<h3>Ajouter un article de catégorie « Nouvelles »</h3>
 			<input type="text" name="title" placeholder="Titre">
@@ -97,22 +94,42 @@ function convertirTableau(&$tPropriété)
 
 	$tPropriété['titre'] = get_the_title(); 
 	$tPropriété['sigle'] = substr($tPropriété['titre'], 0, 7);
-	$tPropriété['nbHeure'] = substr($tPropriété['titre'],-4,3);
+	$tPropriété['nbHeure'] = substr($tPropriété['titre'],-6,6);
 	$tPropriété['titrePartiel'] = substr($tPropriété['titre'],8,-6);
 	$tPropriété['session'] = substr($tPropriété['titre'], 4,1);
 	$tPropriété['typeCours'] = get_field('type_de_cours');
+	$tPropriété['typeSession'] = get_field('session');
+	$tPropriété['typeOption'] = get_field('option');
 }
 
 
-function class_composant($typeCours){
+// function class_composant($typeCours){
 
-	if (in_array($typeCours, ['Web', 'Jeu', 'Spécifique'])){
-		return 'class="carrousel-2"';
+// 	if (in_array($typeCours, ['Web', 'Jeu', 'Spécifique'])){
+// 		return 'class="carrousel-2"';
+// 	}
+// 	elseif ($typeCours == 'Projets'){
+// 		return 'class="galerie"';
+// 	}
+// 	else {
+// 		return 'class="bloc"';
+// 	}
+// }
+function class_composant($typeSession){
+
+	if (in_array($typeSession, ['1','2','3','4','5','6'])){
+			return 'class="session"';
+			function class_composant($typeOption){
+
+				if(in_array($typeOption, ['true'])){
+					return 'class="option"';
+				}
+				
+			
+			}
 	}
-	elseif ($typeCours == 'Projets'){
-		return 'class="galerie"';
-	}
-	else {
-		return 'class="bloc"';
-	}
+	
+
+
 }
+

@@ -246,7 +246,7 @@ add_action('pre_get_posts', 'extraire_cours' );
 L'adaptation de la requête par défaut quand on accède à la page d'accueil
 */
 function extraire_cours_front_page($query){
-	if( !is_admin() && $query->is_front_page() && $query->is_main_query() ){
+	if( !is_admin() && $query->is_front_page() && !$query->is_main_query() ){
 
 	$query->set( 'category_name', 'cours' );
 	$query->set('posts_per_page', -1 );
@@ -255,3 +255,56 @@ function extraire_cours_front_page($query){
 }
 }
 add_action('pre_get_posts','extraire_cours_front_page');
+function extraire_session_front_page($query){
+	if( !is_admin() && $query->is_front_page() && $query->is_main_query() ){
+
+	$query->set( 'category_name', 'cours' );
+	$query->set('posts_per_page', -1 );
+	$query->set('meta_key', 'session');
+	$query->set('orderby', array( 'meta_value' => 'ASC', 'title' => 'ASC' ));
+}
+}
+add_action('pre_get_posts','extraire_session_front_page');
+function extraire_option_front_page($query){
+	if( !is_admin() && $query->is_front_page() && !$query->is_main_query() ){
+
+	$query->set( 'category_name', 'cours' );
+	$query->set('posts_per_page', -1 );
+	$query->set('meta_key', 'option');
+	$query->set('orderby', array( 'meta_value' => 'ASC', 'title' => 'ASC' ));
+}
+}
+add_action('pre_get_posts','extraire_option_front_page');
+
+function extraire_jeu_front_page($query){
+	if( !is_admin() && $query->is_front_page() && !$query->is_main_query() ){
+
+	$query->set( 'category_name', 'cours' );
+	$query->set('posts_per_page', -1 );
+	$query->set('meta_key', 'option');
+	$query->set('orderby', array( 'meta_value' => 'ASC', 'title' => 'ASC' ));
+}
+}
+add_action('pre_get_posts','extraire_jeu_front_page');
+
+function extraire_web_front_page($query){
+	if( !is_admin() && $query->is_front_page() && !$query->is_main_query() ){
+
+	$query->set( 'category_name', 'cours' );
+	$query->set('posts_per_page', -1 );
+	$query->set('meta_key', 'option');
+	$query->set('orderby', array( 'meta_value' => 'ASC', 'title' => 'ASC' ));
+}
+}
+add_action('pre_get_posts','extraire_web_front_page');
+
+function extraire_specifique_front_page($query){
+	if( !is_admin() && $query->is_front_page() && !$query->is_main_query() ){
+
+	$query->set( 'category_name', 'specifique' );
+	$query->set('posts_per_page', -1 );
+	$query->set('meta_key', 'option');
+	$query->set('orderby', array( 'meta_value' => 'ASC', 'title' => 'ASC' ));
+}
+}
+add_action('pre_get_posts','extraire_specifique_front_page');

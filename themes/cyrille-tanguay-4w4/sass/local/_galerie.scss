@@ -3,7 +3,7 @@
     display : flex;
     flex-wrap: wrap;
     justify-content: space-around;
-
+    line-height: 1.5px;
     .flip-card {
         margin : 2%;
         background-color: transparent;
@@ -43,6 +43,6 @@
         background-color: #2980b9;
         color: white;
         transform: rotateY(180deg);
-		line-height: 1.5em;
+        line-height: 1.5em;
       }
 }
